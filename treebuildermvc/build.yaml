@@ -1,0 +1,16 @@
+targets:
+  $default:
+    builders:
+      treebuildermvc|meta_builder:
+        generate_for:
+          - lib/*.dart
+
+builders:
+
+  meta_builder:
+    import: "package:treebuildermvc/builder.dart"
+    builder_factories: ["metaBuilder"]
+    build_extensions: {".dart": ["meta.g.part"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

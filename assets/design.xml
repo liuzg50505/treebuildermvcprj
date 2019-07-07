@@ -1,0 +1,67 @@
+<root>
+    <widgets>
+        <widget controller="AddressBookController">
+            <Scaffold>
+                <appBar>
+                    <AppBar>
+                        <title>
+                            <Text text="Title here: ${title}"  />
+                        </title>
+                    </AppBar>
+                </appBar>
+                <body>
+                    <Column crossAxisAlignment="stretch">
+                        <children>
+                            <Gesture onTap="onTextTap()">
+                                <child>
+                                    <Text text="${title}" textAlign="left"/>
+                                </child>
+                            </Gesture>
+                            <Expanded>
+                                <child>
+                                    <RefreshIndicator onRefresh="onRefresh()">
+                                        <child>
+                                            <ListView>
+                                                <children>
+                                                    <Foreach variable="card" collection="${cards}">
+                                                        <children>
+                                                            <Gesture onTap="onCardTap(card)">
+                                                                <child>
+                                                                    <Controller controllername="CardController">
+                                                                        <params>
+                                                                            <item key="personname" value="${card.name}"/>
+                                                                            <item key="phone1" value="${card.phonenumber1}"/>
+                                                                            <item key="phone2" value="${card.phonenumber2}"/>
+                                                                        </params>
+                                                                    </Controller>
+                                                                </child>
+                                                            </Gesture>
+                                                        </children>
+                                                    </Foreach>
+                                                </children>
+                                            </ListView>
+                                        </child>
+                                    </RefreshIndicator>
+                                </child>
+                            </Expanded>
+                        </children>
+                    </Column>
+                </body>
+            </Scaffold>
+        </widget>
+        <widget controller="CardController">
+            <Column crossAxisAlignment="stretch">
+                <children>
+                    <Text text="${personname}"/>
+                    <Row>
+                        <children>
+                            <Text text="phone1: ${phone1}"/>
+                            <Text text="   "/>
+                            <Text text="phone2: ${phone2}"/>
+                        </children>
+                    </Row>
+                </children>
+            </Column>
+        </widget>
+    </widgets>
+</root>
